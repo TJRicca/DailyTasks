@@ -52,14 +52,36 @@ def pick_tasks(e):
 def submit():
 
     entries = []
+
+    #Check for Missing Name
+    name = name_t.get()
+    if (name == ''):
+        name_t.set("")
+        result.config(text = "Submission Failed: Please Enter Name")
+        return None
     #Get input name from entry field
-    entries.append(name_t.get())
+    else:
+        entries.append(name)
     
+    #Check for Missing Team
+    storeteam = teamCombo.get()
+    if (storeteam == ''):
+        teamCombo.set("")
+        result.config(text = "Submission Failed: Please Enter Team")
+        return None
     #Get Store Team from dropdown
-    entries.append(teamCombo.get())
+    else:
+        entries.append(storeteam)
     
+    #Check for Missing Task
+    task = taskCombo.get()
+    if (task == ''):
+        taskCombo.set("")
+        result.config(text = "Submission Failed: Please Enter Task")
+        return None
     #Get Task from dropdown
-    entries.append(taskCombo.get())
+    else:
+        entries.append(task)
 
     #Get Comments text
     entries.append(comments.get("1.0", tk.END+"-1c"))
@@ -68,7 +90,7 @@ def submit():
     current_time = datetime.datetime.now()
     entries.append(current_time)
 
-    print("The current time is ", current_time)
+    #print("The current time is ", current_time)
 
     #Write the user input to a csv file
     with open('DailyTaskLog.csv', 'a+') as csvfile:
